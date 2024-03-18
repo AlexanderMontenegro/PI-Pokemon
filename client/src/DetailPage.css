@@ -1,0 +1,27 @@
+
+
+.detail-page {
+    margin: 20px;
+  }
+  
+  .detail-page h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .detail-page img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .detail-page p {
+    margin-bottom: 10px;
+  }
+  
+  .detail-page .pokemon-info {
+    font-size: 16px;
+  }
+  
+  
