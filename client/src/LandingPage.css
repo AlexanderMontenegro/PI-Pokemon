@@ -1,26 +1,25 @@
 .landing-page {
-    background-image: url('client\public\Imagenes\Fondo.png');
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-  }
-  
-  .enter-button {
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #007bff; 
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .enter-button:hover {
-    background-color: #0056b3; 
-  }
-  
+  background-image: url('../public/Fondo.png');
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.enter-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #007bff; 
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.enter-button:hover {
+  background-color: #0056b3; 
+}
