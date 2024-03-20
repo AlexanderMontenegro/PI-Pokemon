@@ -1,8 +1,5 @@
 
 const { Type } = require('../db.js');
-const typeController = require('../controllers/type.controllers');
-
-
 
 // todos los tipos de pokemones//
 async function getAllTypes(req, res, next) {
@@ -31,4 +28,4 @@ async function createType(req, res, next) {
 module.exports = {
   getAllTypes,
   createType
-};
+}
