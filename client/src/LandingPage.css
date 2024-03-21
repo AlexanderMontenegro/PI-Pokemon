@@ -1,5 +1,5 @@
 .landing-page {
-  background-image: url('../public/img/mini\ neon.png');
+  background-image: url('../public/img/fondo4.png');
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -9,6 +9,28 @@
   justify-content: center;
   color: white;
 }
+
+.titles {
+  width: 70%; 
+  max-width: 600px; 
+  margin-bottom: 20px; 
+}
+
+.subtitle {
+  font-size: 22px;
+  animation: changeColor 5s infinite; 
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00, 0 0 75px #00ff00; /* Efecto de resplandor neón */
+
+}
+
+@keyframes changeColor {
+  0% { color: green; } 
+  25% { color: blue; } 
+  50% { color: red; } 
+  75% { color: yellow; } 
+  100% { color: green; }
+}
+
 
 
 .enter-button {
@@ -26,3 +48,8 @@
 .enter-button:hover {
   background-color: #0056b3; 
 }
+
+
+
+
+

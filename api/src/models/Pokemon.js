@@ -44,9 +44,9 @@ module.exports = (sequelize) => {
     },
   });
 
-  const User = require('./User')(sequelize); // Importa el modelo de usuario
+  const User = require('./User')(sequelize); 
 
-  // Define la relación con el modelo User correctamente
+
   Pokemon.belongsToMany(User, { through: 'UserPokemon' });
 
   return Pokemon;
