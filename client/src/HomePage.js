@@ -1,36 +1,57 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchPokemons } from './redux/actions'; 
-import PokemonCard from './PokemonCard'; 
 
-function HomePage() {
-  const dispatch = useDispatch();
-  const pokemons = useSelector(state => state.pokemons);
+
+import React, { useState, useEffect } from 'react';
+import PokemonCard from './PokemonCard';
+
+const HomePage = () => {
+  const [pokemons, setPokemons] = useState([]);
+  const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterByType, setFilterByType] = useState('');
+  const [selectedType, setSelectedType] = useState('');
   const [sortBy, setSortBy] = useState('');
 
+  useEffect(() => {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=100') 
+      .then(response => response.json())
+      .then(data => {
+        setPokemons(data.results);
+        setFilteredPokemons(data.results);
+      })
+      .catch(error => console.error('Error fetching pokemons:', error));
+  }, []);
+
   const handleSearch = () => {
-    dispatch(fetchPokemons(searchTerm));
+    const filtered = pokemons.filter(pokemon => pokemon.name.includes(searchTerm.toLowerCase()));
+    setFilteredPokemons(filtered);
   };
 
-  const handleFilterByType = (type) => {
-    setFilterByType(type);
+  const handleTypeChange = async (type) => {
+    setSelectedType(type);
+    if (type === '') {
+      setFilteredPokemons(pokemons);
+      return;
+    }
+    try {
+      const response = await fetch(`https://pokeapi.co/api/v2/type/${type}`);
+      const data = await response.json();
+      const pokemonNames = data.pokemon.map(p => p.pokemon.name);
+      const filtered = pokemons.filter(pokemon => pokemonNames.includes(pokemon.name));
+      setFilteredPokemons(filtered);
+    } catch (error) {
+      console.error('Error fetching pokemon by type:', error);
+    }
   };
 
   const handleSortBy = (criteria) => {
     setSortBy(criteria);
+    const sortedPokemons = [...filteredPokemons];
+    if (criteria === 'alphabetical') {
+      sortedPokemons.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (criteria === 'attack') {
+      sortedPokemons.sort((a, b) => a.base_stat - b.base_stat);
+    }
+    setFilteredPokemons(sortedPokemons);
   };
-
-  // Filtrar Pokémon por tipo
-  const filteredPokemons = filterByType ? pokemons.filter(pokemon => pokemon.types.includes(filterByType)) : pokemons;
-
-  // Ordenar Pokémon según el seleccionado
-  const sortedPokemons = sortBy === 'alphabetical' 
-    ? [...filteredPokemons].sort((a, b) => a.name.localeCompare(b.name)) 
-    : sortBy === 'attack' 
-    ? [...filteredPokemons].sort((a, b) => b.attack - a.attack) 
-    : filteredPokemons;
 
   return (
     <div className="home-page">
@@ -41,32 +62,33 @@ function HomePage() {
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button onClick={handleSearch}>Buscar</button>
+
       <div>
-        <button onClick={() => handleFilterByType('fire')}>Fuego</button>
-        <button onClick={() => handleFilterByType('water')}>Agua</button>
-        <button onClick={() => handleFilterByType('grass')}>Planta</button>
-        <button onClick={() => handleFilterByType('electric')}>Electrico</button>
-        <button onClick={() => handleFilterByType('fighting')}>Lucha</button>
-        <button onClick={() => handleFilterByType('poison')}>Veneno</button>
-        <button onClick={() => handleFilterByType('flying')}>Volador</button>
-        <button onClick={() => handleFilterByType('psychic')}>Psiquico</button>
-        <button onClick={() => handleFilterByType('bug')}>Bicho</button>
-        <button onClick={() => handleFilterByType('rock')}>Roca</button>
-        <button onClick={() => handleFilterByType('ghost')}>Fantasma</button>
-        <button onClick={() => handleFilterByType('')}></button>
-      
+        <select value={selectedType} onChange={(e) => handleTypeChange(e.target.value)}>
+          <option value="">Todos los tipos</option>
+          <option value="fire">Fuego</option>
+          <option value="water">Agua</option>
+          <option value="rock">Roca</option>
+          <option value="electric">Electrico</option>
+          <option value="grass">Planta</option>
+          <option value="ice">Hielo</option>
+          <option value="bug">Bicho</option>
+    
+        </select>
       </div>
+
       <div>
         <button onClick={() => handleSortBy('alphabetical')}>Ordenar alfabéticamente</button>
         <button onClick={() => handleSortBy('attack')}>Ordenar por ataque</button>
       </div>
+
       <div className="pokemon-list">
-        {sortedPokemons.map(pokemon => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        {filteredPokemons.map((pokemon, index) => (
+          <PokemonCard key={index} pokemon={pokemon} />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;
