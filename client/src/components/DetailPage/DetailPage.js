@@ -1,5 +1,5 @@
 import React from 'react';
-import './DetailPage.css';
+import '../DetailPage.css';
 
 const DetailPage = ({ pokemon }) => {
   return (

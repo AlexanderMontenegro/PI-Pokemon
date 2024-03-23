@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PokemonCard from '../PokemonCard/PokemonCard';
+import './HomePage.css';
 
 const HomePage = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -9,7 +10,7 @@ const HomePage = () => {
   const [sortBy, setSortBy] = useState(''); 
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=100') 
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=12') 
       .then(response => response.json())
       .then(data => {
         setPokemons(data.results);
