@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import PokemonCard from './PokemonCard';
 
@@ -8,7 +6,7 @@ const HomePage = () => {
   const [filteredPokemons, setFilteredPokemons] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('');
-  const [sortBy, setSortBy] = useState('');
+  const [sortBy, setSortBy] = useState(''); 
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=100') 
