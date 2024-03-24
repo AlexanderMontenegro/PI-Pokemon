@@ -1,5 +1,5 @@
 .landing-page {
-  background-image: url('../public/img/fondo4.png');
+  background-image: url('../../../public/img/fondo2a.svg');
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+
 }
 
 .titles {
@@ -19,16 +19,16 @@
 .subtitle {
   font-size: 22px;
   animation: changeColor 5s infinite; 
-  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00, 0 0 75px #00ff00; /* Efecto de resplandor neón */
-
+  text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 50px #00ff00, 0 0 75px #00ff00;
 }
+
 
 @keyframes changeColor {
   0% { color: green; } 
-  25% { color: blue; } 
-  50% { color: red; } 
+  25% { color: rgb(255, 187, 0); } 
+  50% { color: rgb(0, 255, 42); } 
   75% { color: yellow; } 
-  100% { color: green; }
+  100% { color: rgb(0, 10, 0); }
 }
 
 
@@ -43,13 +43,24 @@
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-decoration: none;
+  animation: changeColor 5s infinite; 
+  text-shadow: 0 0 5px hwb(0 0% 0%), 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000, 0 0 75px #ff0000;
+
 }
+
+
 
 .enter-button:hover {
-  background-color: #0056b3; 
+  background-color: transparent; 
+  animation: rotateImage 1s infinite linear; 
 }
 
-
-
-
-
+@keyframes rotateImage {
+  from {
+    transform: rotate(0deg); 
+  }
+  to {
+    transform: rotate(360deg); 
+  }
+}
